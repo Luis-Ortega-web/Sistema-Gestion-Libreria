@@ -1,3 +1,4 @@
+
 from src.data.database_mgr import create_tables, get_connection
 from src.presentation.login_ui import login
 from src.presentation.inventory_ui import menu_inventario
@@ -6,7 +7,6 @@ def crear_usuario_prueba():
     conn = get_connection()
     cursor = conn.cursor()
 
-    
     cursor.execute("SELECT * FROM usuario WHERE username = ?", ("admin",))
     usuario = cursor.fetchone()
 
