@@ -1,4 +1,4 @@
-Sistema de Gestión de Librería
+## Sistema de Gestión de Librería.
 
  ## Descripción:
 
@@ -44,5 +44,6 @@ Contraseña: 1234
 * Visualización de libros almacenados
 
 * Conexión operativa con base de datos
+
 
 
