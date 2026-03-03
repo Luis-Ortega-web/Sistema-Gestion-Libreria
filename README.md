@@ -32,6 +32,7 @@ Ejecutar el archivo principal del proyecto desde la terminal:
   ## Credenciales de Prueba:
 
 Usuario: admin
+
 Contraseña: 1234
 
 ## Funcionalidades Implementadas:
@@ -43,4 +44,5 @@ Contraseña: 1234
 * Visualización de libros almacenados
 
 * Conexión operativa con base de datos
+
 
