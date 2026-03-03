@@ -1,11 +1,45 @@
-5. Documentación técnica inicial en README
+Sistema de Gestión de Librería
 
-El proyecto incluye un archivo README.md dentro del repositorio oficial en GitHub, el cual contiene la documentación técnica inicial del Sistema de Gestión de Librería. Este archivo tiene como objetivo proporcionar información clara y estructurada sobre el funcionamiento general del sistema, así como las instrucciones necesarias para su correcta instalación y ejecución.
+Descripción:
 
-En el README se describe el propósito del sistema, explicando que se trata de una aplicación desarrollada en Python orientada a la gestión interna de una librería. Se especifica que el sistema permite la autenticación mediante un inicio de sesión y la gestión de libros conectados a una base de datos, garantizando el almacenamiento persistente de la información.
+Sistema desarrollado en Python para la gestión interna de una librería.
+Permite autenticación de usuarios y gestión de libros conectados a una base de datos, garantizando el almacenamiento persistente de la información.
 
-La documentación técnica también detalla los requisitos necesarios para ejecutar el proyecto, incluyendo la instalación del entorno de Python y la configuración adecuada de la base de datos utilizada. Se indica que el sistema debe ejecutarse a través del archivo principal main.py desde la terminal, asegurando así el correcto inicio de la aplicación.
+Este proyecto corresponde al Entregable 3 – Avance Funcional de la asignatura Programación III.
 
-Además, el README explica el procedimiento para realizar pruebas del sistema, incluyendo las credenciales de acceso previamente registradas en la base de datos para validar el módulo de inicio de sesión. También se describen las funcionalidades implementadas en este avance, tales como la autenticación de usuarios, el registro de nuevos libros y la visualización de los libros almacenados.
+Requisitos:
 
-Por último, el documento proporciona una visión general de la estructura del proyecto y su organización interna, permitiendo que cualquier desarrollador o evaluador pueda comprender la distribución del sistema, su funcionamiento básico y la manera en que interactúa con la base de datos. De esta forma, el README cumple con su función de servir como guía técnica inicial del proyecto en esta etapa de desarrollo.
+* Python 3 instalado
+
+* Base de datos configurada
+
+* Dependencias instaladas (ver archivo requirements.txt)
+
+* Instalación
+
+* Clonar el repositorio desde GitHub.
+
+* Instalar las dependencias necesarias.
+
+* Verificar que la base de datos esté correctamente configurada.
+
+* Ejecución
+
+Ejecutar el archivo principal del proyecto desde la terminal:
+
+* python main.py
+
+* Credenciales de Prueba
+
+Usuario: admin
+Contraseña: 1234
+
+Funcionalidades Implementadas:
+
+* Inicio de sesión
+
+* Registro de libros
+
+* Visualización de libros almacenados
+
+* Conexión operativa con base de datos
