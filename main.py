@@ -1,7 +1,7 @@
-
 from src.data.database_mgr import create_tables, get_connection
 from src.presentation.login_ui import login
 from src.presentation.inventory_ui import menu_inventario
+
 
 def crear_usuario_prueba():
     conn = get_connection()
@@ -19,12 +19,11 @@ def crear_usuario_prueba():
 
     conn.close()
 
+
 if __name__ == "__main__":
+
     create_tables()
     crear_usuario_prueba()
 
     if login():
-        print("Bienvenido al sistema")
         menu_inventario()
-    else:
-        print("Acceso denegado")
