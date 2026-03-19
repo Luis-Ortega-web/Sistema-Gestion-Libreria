@@ -22,3 +22,14 @@ def listar_libros():
 
     conexion.close()
     return resultados
+def eliminar_libro(id_libro):
+    conexion = get_connection()
+    cursor = conexion.cursor()
+
+    cursor.execute(
+        "DELETE FROM libro WHERE id = ?",
+        (id_libro,)
+    )
+
+    conexion.commit()
+    conexion.close()
