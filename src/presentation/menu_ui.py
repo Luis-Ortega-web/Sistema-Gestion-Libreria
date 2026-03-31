@@ -5,6 +5,10 @@ def abrir_clientes():
     from src.presentation.client_ui import menu_clientes
     menu_clientes()
 
+def abrir_alquileres():
+    from src.presentation.alquiler_ui import menu_alquileres
+    menu_alquileres()
+
 def menu_principal():
     ventana = ctk.CTk()
     ventana.title("Sistema de Librería")
@@ -22,6 +26,12 @@ def menu_principal():
         ventana,
         text="Clientes",
         command=lambda: [ventana.destroy(), abrir_clientes()]
+    ).pack(pady=10)
+    
+    ctk.CTkButton(
+        ventana,
+        text="Alquileres",
+        command=lambda: [ventana.destroy(), abrir_alquileres()]
     ).pack(pady=10)
 
     ventana.mainloop()
