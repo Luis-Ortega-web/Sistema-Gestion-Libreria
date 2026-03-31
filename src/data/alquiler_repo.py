@@ -37,3 +37,22 @@ def listar_alquileres():
     resultados = cursor.fetchall()
     conexion.close()
     return resultados
+def registrar_devolucion(alquiler_id):
+    conexion = get_connection()
+    cursor = conexion.cursor()
+
+    cursor.execute("""
+        UPDATE alquiler SET estado = 'devuelto',
+        fecha_devolucion_real = datetime('now', 'localtime')
+        WHERE id = ?
+    """, (alquiler_id,))
+
+    cursor.execute("""
+        UPDATE libro SET cantidad_disponible = cantidad_disponible + 1
+        WHERE id = (
+            SELECT libro_id FROM detalle_alquiler WHERE alquiler_id = ?
+        )
+    """, (alquiler_id,))
+
+    conexion.commit()
+    conexion.close()

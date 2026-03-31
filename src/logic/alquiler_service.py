@@ -1,4 +1,4 @@
-from src.data.alquiler_repo import registrar_alquiler, listar_alquileres
+from src.data.alquiler_repo import registrar_alquiler, listar_alquileres, registrar_devolucion
 from src.data.client_repo import listar_clientes
 from src.data.book_repo import listar_libros
 
@@ -13,3 +13,6 @@ def obtener_clientes():
 
 def obtener_libros():
     return listar_libros()
+
+def devolver_libro(alquiler_id):
+    registrar_devolucion(alquiler_id)

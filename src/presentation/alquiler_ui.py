@@ -1,5 +1,5 @@
 import customtkinter as ctk
-from src.logic.alquiler_service import crear_alquiler, obtener_alquileres, obtener_clientes, obtener_libros
+from src.logic.alquiler_service import crear_alquiler, obtener_alquileres, obtener_clientes, obtener_libros, devolver_libro
 
 class AlquilerUI(ctk.CTk):
 
@@ -31,11 +31,18 @@ class AlquilerUI(ctk.CTk):
         ctk.CTkButton(self, text="Cargar listas", command=self.cargar_listas).pack(pady=5)
         ctk.CTkButton(self, text="Registrar alquiler", command=self.registrar_alquiler).pack(pady=10)
         ctk.CTkButton(self, text="Ver alquileres", command=self.ver_alquileres).pack(pady=5)
-
+        
+        
         self.lista = ctk.CTkTextbox(self, width=600, height=200)
         self.lista.pack(pady=10)
 
+        self.devolucion_id = ctk.CTkEntry(self, placeholder_text="ID del alquiler a devolver")
+        self.devolucion_id.pack(pady=5)
+
+        ctk.CTkButton(self, text="Registrar devolución", command=self.registrar_devolucion).pack(pady=5)
+
         ctk.CTkButton(self, text="Volver al menú", command=self.volver).pack(pady=5)
+         
 
     def cargar_listas(self):
         self.clientes = obtener_clientes()
@@ -78,6 +85,18 @@ class AlquilerUI(ctk.CTk):
             texto = f"#{a['id']} - {a['nombre']} - {a['titulo']} - Prestado: {a['fecha_prestamo']} - Devolver: {a['fecha_devolucion_prevista']} - Estado: {a['estado']}\n"
             self.lista.insert("end", texto)
 
+    def registrar_devolucion(self):
+        alquiler_id = self.devolucion_id.get()
+        if alquiler_id == "":
+            self.lista.insert("end", "Debe ingresar el ID del alquiler\n")
+            return
+
+        devolver_libro(int(alquiler_id))
+        self.lista.insert("end", f"Devolución del alquiler #{alquiler_id} registrada correctamente\n")
+        self.devolucion_id.delete(0, "end")
+            
+            
+        
     def volver(self):
         self.destroy()
         from src.presentation.menu_ui import menu_principal
