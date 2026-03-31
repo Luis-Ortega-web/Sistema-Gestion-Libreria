@@ -55,6 +55,15 @@ class InventarioUI(ctk.CTk):
         self.eliminar_id = ctk.CTkEntry(self, placeholder_text="ID del libro a eliminar")
         self.eliminar_id.pack(pady=5)
 
+        self.actualizar_id = ctk.CTkEntry(self, placeholder_text="ID del libro a actualizar")
+        self.actualizar_id.pack(pady=5)
+
+        actualizar_btn = ctk.CTkButton(self, text="Cargar datos para editar", command=self.cargar_libro)
+        actualizar_btn.pack(pady=5)
+
+        guardar_btn = ctk.CTkButton(self, text="Guardar cambios", command=self.guardar_actualizacion)
+        guardar_btn.pack(pady=5)
+
         eliminar_btn = ctk.CTkButton(self, text="Eliminar libro", command=self.eliminar_libro)
         eliminar_btn.pack(pady=5)
 
@@ -124,6 +133,53 @@ class InventarioUI(ctk.CTk):
         self.lista.insert("end", "Libro eliminado correctamente\n")
 
         self.eliminar_id.delete(0, "end")
+
+    def cargar_libro(self):
+        id_libro = self.actualizar_id.get()
+        if id_libro == "":
+            self.lista.insert("end", "Debe ingresar el ID del libro\n")
+            return
+
+        libros = obtener_libros()
+        libro = next((l for l in libros if l["id"] == int(id_libro)), None)
+
+        if not libro:
+            self.lista.insert("end", "No se encontró un libro con ese ID\n")
+            return
+
+        self.titulo.delete(0, "end")
+        self.titulo.insert(0, libro["titulo"])
+        self.autor.delete(0, "end")
+        self.autor.insert(0, libro["autor"])
+        self.categoria.delete(0, "end")
+        self.categoria.insert(0, libro["categoria"] or "")
+        self.isbn.delete(0, "end")
+        self.isbn.insert(0, libro["isbn"] or "")
+        self.cantidad.delete(0, "end")
+        self.cantidad.insert(0, str(libro["cantidad_disponible"]))
+        self.precio.delete(0, "end")
+        self.precio.insert(0, str(libro["precio"]))
+
+        self.lista.insert("end", f"Datos del libro #{id_libro} cargados. Edítalos y presiona 'Guardar cambios'.\n")
+
+    def guardar_actualizacion(self):
+        id_libro = self.actualizar_id.get()
+        if id_libro == "" or self.titulo.get() == "":
+            self.lista.insert("end", "Debe cargar un libro primero\n")
+            return
+
+        actualizar_libro(
+            int(id_libro),
+            self.titulo.get(),
+            self.autor.get(),
+            self.categoria.get(),
+            self.isbn.get(),
+            int(self.cantidad.get()),
+            float(self.precio.get()),
+        )
+
+        self.lista.insert("end", f"Libro #{id_libro} actualizado correctamente\n")
+        self.actualizar_id.delete(0, "end")
 
 
 def menu_inventario():

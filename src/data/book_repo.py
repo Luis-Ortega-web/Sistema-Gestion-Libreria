@@ -33,3 +33,15 @@ def eliminar_libro(id_libro):
 
     conexion.commit()
     conexion.close()
+
+
+def actualizar_libro(id_libro, titulo, autor, categoria, isbn, cantidad, precio):
+    conexion = get_connection()
+    cursor = conexion.cursor()
+    cursor.execute("""
+        UPDATE libro
+        SET titulo = ?, autor = ?, categoria = ?, isbn = ?, cantidad_disponible = ?, precio = ?
+        WHERE id = ?
+    """, (titulo, autor, categoria, isbn, cantidad, precio, id_libro))
+    conexion.commit()
+    conexion.close()

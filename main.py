@@ -1,7 +1,7 @@
 from src.data.database_mgr import create_tables, get_connection
 from src.presentation.login_ui import login
 from src.presentation.inventory_ui import menu_inventario
-
+from src.presentation.menu_ui import menu_principal
 
 def crear_usuario_prueba():
     conn = get_connection()
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     crear_usuario_prueba()
 
     if login():
-        menu_inventario()
+        menu_principal()
