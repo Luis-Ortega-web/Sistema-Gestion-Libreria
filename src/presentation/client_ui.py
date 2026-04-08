@@ -39,6 +39,7 @@ class ClienteUI(ctk.CTk):
 
     def registrar_cliente(self):
         if self.nombre.get() == "":
+            self.lista.delete("0.0", "end")
             self.lista.insert("end", "El nombre es obligatorio\n")
             return
 
@@ -49,6 +50,7 @@ class ClienteUI(ctk.CTk):
             self.direccion.get(),
         )
 
+        self.lista.delete("0.0", "end")
         self.lista.insert("end", "Cliente registrado correctamente\n")
 
         self.nombre.delete(0, "end")
@@ -56,12 +58,19 @@ class ClienteUI(ctk.CTk):
         self.email.delete(0, "end")
         self.direccion.delete(0, "end")
 
+
     def ver_clientes(self):
         clientes = obtener_clientes()
         self.lista.delete("0.0", "end")
+
+        if not clientes:
+            self.lista.insert("end", "No hay clientes registrados\n")
+            return
+
         for cliente in clientes:
             texto = f"{cliente['id']} - {cliente['nombre']} - {cliente['telefono']} - {cliente['email']}\n"
             self.lista.insert("end", texto)
+
 
     def volver(self):
         self.destroy()

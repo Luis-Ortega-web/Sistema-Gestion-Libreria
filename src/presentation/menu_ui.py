@@ -9,10 +9,14 @@ def abrir_alquileres():
     from src.presentation.alquiler_ui import menu_alquileres
     menu_alquileres()
 
+def abrir_ventas():
+    from src.presentation.ventas_ui import menu_ventas
+    menu_ventas()
+
 def menu_principal():
     ventana = ctk.CTk()
     ventana.title("Sistema de Librería")
-    ventana.geometry("400x300")
+    ventana.geometry("400x350")
 
     ctk.CTkLabel(ventana, text="Menú Principal", font=("Arial", 22)).pack(pady=20)
 
@@ -32,6 +36,13 @@ def menu_principal():
         ventana,
         text="Alquileres",
         command=lambda: [ventana.destroy(), abrir_alquileres()]
+    ).pack(pady=10)
+
+    # 🔹 BOTÓN DE VENTAS (esto es lo único nuevo)
+    ctk.CTkButton(
+        ventana,
+        text="Ventas",
+        command=lambda: [ventana.destroy(), abrir_ventas()]
     ).pack(pady=10)
 
     ventana.mainloop()

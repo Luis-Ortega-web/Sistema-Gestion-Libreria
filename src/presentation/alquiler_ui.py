@@ -33,8 +33,7 @@ class AlquilerUI(ctk.CTk):
         ctk.CTkButton(self, text="Ver activos", command=self.ver_activos).pack(pady=5)
         ctk.CTkButton(self, text="Ver devueltos", command=self.ver_devueltos).pack(pady=5)
         
-        
-        self.lista = ctk.CTkTextbox(self, width=600, height=200)
+        self.lista = ctk.CTkTextbox(self, width=600, height=130)
         self.lista.pack(pady=10)
 
         self.devolucion_id = ctk.CTkEntry(self, placeholder_text="ID del alquiler a devolver")
@@ -60,14 +59,18 @@ class AlquilerUI(ctk.CTk):
         if nombres_libros:
             self.combo_libro.set(nombres_libros[0])
 
+        self.lista.delete("0.0", "end")
         self.lista.insert("end", "Listas cargadas correctamente\n")
+
 
     def registrar_alquiler(self):
         if self.combo_cliente.get() == "" or self.combo_libro.get() == "":
+            self.lista.delete("0.0", "end")
             self.lista.insert("end", "Debe cargar las listas primero\n")
             return
 
         if self.fecha.get() == "":
+            self.lista.delete("0.0", "end")
             self.lista.insert("end", "Debe ingresar la fecha de devolución\n")
             return
 
@@ -76,47 +79,62 @@ class AlquilerUI(ctk.CTk):
 
         crear_alquiler(cliente_id, libro_id, self.fecha.get())
 
+        self.lista.delete("0.0", "end")
         self.lista.insert("end", "Alquiler registrado correctamente\n")
+
         self.fecha.delete(0, "end")
+
 
     def ver_activos(self):
         alquileres = obtener_alquileres()
+
         self.lista.delete("0.0", "end")
         self.lista.insert("end", "--- ALQUILERES ACTIVOS ---\n")
+
         encontrados = False
         for a in alquileres:
             if a['estado'] == 'activo':
                 texto = f"#{a['id']} - {a['nombre']} - {a['titulo']} - Prestado: {a['fecha_prestamo']} - Devolver: {a['fecha_devolucion_prevista']}\n"
                 self.lista.insert("end", texto)
                 encontrados = True
+
         if not encontrados:
             self.lista.insert("end", "No hay alquileres activos\n")
 
+
     def ver_devueltos(self):
         alquileres = obtener_alquileres()
+
         self.lista.delete("0.0", "end")
         self.lista.insert("end", "--- ALQUILERES DEVUELTOS ---\n")
+
         encontrados = False
         for a in alquileres:
             if a['estado'] == 'devuelto':
-                texto = f"#{a['id']} - {a['nombre']} - {a['titulo']} - Prestado: {a['fecha_prestamo']} - Devuelto: {a['fecha_devolucion_prevista']}\n"
+                texto = f"#{a['id']} - {a['nombre']} - {a['titulo']} - Prestado: {a['fecha_prestamo']} - Devuelto: {a['fecha_devolucion_real']}\n"
                 self.lista.insert("end", texto)
                 encontrados = True
+
         if not encontrados:
             self.lista.insert("end", "No hay alquileres devueltos\n")
 
+
     def registrar_devolucion(self):
         alquiler_id = self.devolucion_id.get()
+
         if alquiler_id == "":
+            self.lista.delete("0.0", "end")
             self.lista.insert("end", "Debe ingresar el ID del alquiler\n")
             return
 
         devolver_libro(int(alquiler_id))
+
+        self.lista.delete("0.0", "end")
         self.lista.insert("end", f"Devolución del alquiler #{alquiler_id} registrada correctamente\n")
+
         self.devolucion_id.delete(0, "end")
-            
-            
-        
+
+
     def volver(self):
         self.destroy()
         from src.presentation.menu_ui import menu_principal

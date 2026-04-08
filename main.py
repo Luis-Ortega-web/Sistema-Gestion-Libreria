@@ -2,6 +2,7 @@ from src.data.database_mgr import create_tables, get_connection
 from src.presentation.login_ui import login
 from src.presentation.inventory_ui import menu_inventario
 from src.presentation.menu_ui import menu_principal
+from src.presentation.ventas_ui import menu_ventas
 
 def crear_usuario_prueba():
     conn = get_connection()
